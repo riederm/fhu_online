@@ -1,0 +1,69 @@
+{
+	"type": "Collection",
+	"properties": {
+		"name": {
+			"name": "name",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "name",
+			"order": 0
+		},
+		"menuImg": {
+			"name": "menuImg",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "menuImg",
+			"order": 1
+		},
+		"headerTitle": {
+			"name": "headerTitle",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "headerTitle",
+			"order": 2
+		},
+		"headerImg": {
+			"name": "headerImg",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "headerImg",
+			"order": 3
+		},
+		"description": {
+			"name": "description",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "description",
+			"order": 4
+		},
+		"extendedDescription": {
+			"name": "extendedDescription",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "extendedDescription",
+			"order": 5
+		},
+		"downloads": {
+			"name": "downloads",
+			"type": "array",
+			"typeLabel": "array",
+			"required": false,
+			"id": "downloads",
+			"order": 6
+		},
+		"videoId": {
+			"name": "videoId",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "videoId",
+			"order": 7
+		}
+	}
+}

@@ -1,0 +1,89 @@
+{
+    "id01": [{
+            "avatar": "welpen.jpg",
+            "content": "I love cheese, especially airedale queso. Cheese and biscuits halloumi cauliflower cheese cottage cheese swiss boursin fondue caerphilly. Cow port - salut camembert de normandie macaroni cheese feta who moved my cheese babybel boursin. Red leicester roquefort boursin squirty cheese jarlsberg blue castello caerphilly chalk and cheese. Lancashire.",
+            "lesson": {
+                "description": "Das Longieren mit Hund oder Longiertraining ist eine Trainingsform, bei der der Hund außen um einen Kreis läuft und dabei den Kommandos des Hundeführers folgt. Anhänger sehen darin eine Möglichkeit, die Bindung und Kommunikation zwischen Hund und Mensch (Hundeführer) herzustellen, zu verbessern und zu festigen.",
+                "downloads": [{
+                        "description": "Die Wurzeln des Longierens. Vom Pferd zum Hund, lorem ipsum elitr, sed diam nonumy eirmod tempor.",
+                        "name": "Geschichte und Herkunft (pdf)",
+                        "url": "./file.pdf"
+                    }, {
+                        "description": "Grundlagen über den Kreis, die Longe, Ziele und Voraussetzungen.",
+                        "name": "Grundlagen (pdf)",
+                        "url": "./file.pdf"
+                    }],
+                "extendedDescription": "Das Longieren erfolgt an einem abgesteckten Kreis, dessen Durchmesser je nach Größe des Hundes etwa 10 bis 30 Meter beträgt.[2] Der Hundeführer bewegt sich im Inneren des Kreises, der Anfängerhund wird an einer Leine geführt. Im Verlauf des Trainings lernt der Hund, sich ausschließlich außerhalb des Kreises zu bewegen und dabei auf die – in erster Linie körpersprachlich gegebenen – Signale des Hundeführers zu achten. Zum Aufbau dieses Verhaltens existieren verschiedene Ansätze (restriktiv aufgebaute Tabouzone Innenkreis, [3] Klickertraining). Bei allen Formen des Trainingsaufbaus wird Wert darauf gelegt, dass der Hund agiert und für richtiges Verhalten bestätigt wird (→ Konditionierung). In Erwartung der Bestätigung beginnt der Hund den Hundeführer genau zu beobachten. Er muss herausfinden, welches Verhalten für die Bestätigung nötig ist und wird nicht gelockt.[4]",
+                "headerImg": "./assets/courses/card_top/longieren01.jpg",
+                "headerTitle": "Grundlagen des Longierens"
+            },
+            "name": "Grundlagen",
+            "videoId": "DyMWLf71X0o"
+        }, {
+            "avatar": "junghunde.jpg",
+            "content": "Zombie ipsum reversus ab viral inferno, nam rick grimes malum cerebro. De carne lumbering animata corpora quaeritis. Summus brains sit​​, morbo vel maleficia? De apocalypsi gorger omero undead survivor dictum mauris.",
+            "lesson": {
+                "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren.",
+                "extendedDescription": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam",
+                "headerImg": "http://placehold.it/750x250",
+                "headerTitle": "Lorem Ipsum"
+            },
+            "name": "Der Kreis",
+            "videoId": "XexJnJMwfLY"
+        }, {
+            "avatar": "junghunde2.jpg",
+            "content": "I love cheese, especially airedale queso. Cheese and biscuits halloumi cauliflower cheese cottage cheese swiss boursin fondue caerphilly. Cow port - salut camembert de normandie macaroni cheese feta who moved my cheese babybel boursin. Red leicester roquefort boursin squirty cheese jarlsberg blue castello caerphilly chalk and cheese. Lancashire.",
+            "lesson": {
+                "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren.",
+                "extendedDescription": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam",
+                "headerImg": "http://placehold.it/750x250",
+                "headerTitle": "Lorem Ipsum"
+            },
+            "name": "Aufwärmen",
+            "videoId": "edUjmxjBzfE"
+        }, {
+            "avatar": "erwachsene.jpg",
+            "content": "Scratch the furniture spit up on light gray carpet instead of adjacent linoleum so eat a plant, kill a hand pelt around the house and up and down stairs chasing phantoms run in circles, or claw drapes. Always hungry pelt around the house and up and down stairs chasing phantoms.",
+            "lesson": {
+                "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren.",
+                "extendedDescription": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam",
+                "headerImg": "http://placehold.it/750x250",
+                "headerTitle": "Lorem Ipsum"
+            },
+            "name": "Sitz am Kreis",
+            "videoId": "XexJnJMwfLY"
+        }, {
+            "avatar": "longierenI.jpg",
+            "content": "Webtwo ipsum dolor sit amet, eskobo chumby doostang bebo. Bubbli greplin stypi prezi mzinga heroku wakoopa, shopify airbnb dogster dopplr gooru jumo, reddit plickers edmodo stypi zillow etsy.",
+            "lesson": {
+                "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren.",
+                "extendedDescription": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam",
+                "headerImg": "http://placehold.it/750x250",
+                "headerTitle": "Lorem Ipsum"
+            },
+            "name": "Longieren I",
+            "videoId": "pxAKBEdS - FE"
+        }, {
+            "avatar": "longierenII.jpg",
+            "content": "Lebowski ipsum yeah? What do you think happens when you get rad? You turn in your library card? Get a new driver's license? Stop being awesome? Dolor sit amet, consectetur adipiscing elit praesent ac magna justo pellentesque ac lectus. You don't go out and make a living dressed like that in the middle of a weekday. Quis elit blandit fringilla a ut turpis praesent felis ligula, malesuada suscipit malesuada.",
+            "lesson": {
+                "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren.",
+                "extendedDescription": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam",
+                "headerImg": "http://placehold.it/750x250",
+                "headerTitle": "Lorem Ipsum"
+            },
+            "name": "Distanz aufbauen",
+            "videoId": "pxAKBEdS - FE"
+        }, {
+            "avatar": "clickI.jpg",
+            "content": "Lebowski ipsum yeah? What do you think happens when you get rad? You turn in your library card? Get a new driver's license? Stop being awesome? Dolor sit amet, consectetur adipiscing elit praesent ac magna justo pellentesque ac lectus. You don't go out and make a living dressed like that in the middle of a weekday. Quis elit blandit fringilla a ut turpis praesent felis ligula, malesuada suscipit malesuada.",
+            "lesson": {
+                "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren.",
+                "extendedDescription": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam",
+                "headerImg": "http://placehold.it/750x250",
+                "headerTitle": "Lorem Ipsum"
+            },
+            "name": "Ohne Longe",
+            "videoId": "XexJnJMwfLY"
+        }]
+}
