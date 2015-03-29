@@ -22,11 +22,18 @@
     </md-list>
 </md-sidenav>
 <div layout="column" flex>
-    <md-toolbar>
+    <md-toolbar layout="row">
         <md-button class="menu" hide-gt-sm  aria-label="Show Menu">
             <md-icon md-svg-icon="menu" ></md-icon>
         </md-button>
         <h1>Kurse</h1>
+        
+        <md-button class="loginButton md-raised md-primary md-hue-1" ng-href="#/login?returnTo=courses">
+            <div style="margin-top: 5px;" ng-controller="LoginController as lctl">
+                <md-icon  md-svg-icon="login" ></md-icon> {{lctl.message}}
+            </div>
+        </md-button>
+        
     </md-toolbar>
 
     <md-content layout="column" flex layout-fill class="md-padding" style="background-color: #ececec;">

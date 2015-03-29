@@ -34,6 +34,9 @@
     <script src="./src/courses/Courses.js"></script>
     <script src="./src/courses/CoursesController.js"></script>
     <script src="./src/courses/CoursesDataservice.js"></script>
+    
+    <script src="src/user/LoginController.js" type="text/javascript"></script>
+    <script src="src/user/UserService.js" type="text/javascript"></script>
 
     <script src="src/course-detail/CourseDetail.js" type="text/javascript"></script>
     <script src="src/course-detail/CourseDetailController.js" type="text/javascript"></script>
@@ -44,7 +47,9 @@
 
         angular
                 .module('starterApp', ['ngMaterial', 'courses', 'coursedetail', 'youtube-embed', 'ngRoute'])
-                .config(function($mdThemingProvider, $mdIconProvider, $routeProvider) {
+                .config(function($mdThemingProvider, $mdIconProvider, $routeProvider, $httpProvider) {
+
+                    $httpProvider.defaults.withCredentials = true;
 
                     $mdIconProvider
                             .defaultIconSet("./assets/svg/avatars.svg", 128)
@@ -53,6 +58,9 @@
                             .icon("share", "./assets/svg/share.svg", 24)
                             .icon("logo", "./assets/svg/ic_school_48px.svg", 50)
                             .icon("back", "./assets/svg/ic_chefron_left_24px.svg", 50)
+                            .icon("password", "./assets/svg/ic_lock_24px.svg", 24)
+                            .icon("username", "./assets/svg/ic_account_circle_24px.svg", 24)
+                            .icon("login", "./assets/svg/ic_account_box_24px.svg", 32)
 
                             .icon("info", "./assets/svg/ic_info_outline_24px.svg", 48)
                             .icon("download", "./assets/svg/ic_file_download_24px.svg", 48)
@@ -72,6 +80,10 @@
                             when('/courseDetail/:courseId', {
                                 templateUrl: 'src/course-detail/view/coursedetail.html',
                                 controller: 'CourseDetailController as cd'
+                            }).
+                            when('/login', {
+                                templateUrl: 'src/user/view/login.html',
+                                controller: 'LoginController as ctl'
                             }).
                             //when('/phones/:phoneId', {
                             //  templateUrl: 'partials/phone-detail.html',
