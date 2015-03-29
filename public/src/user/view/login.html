@@ -1,0 +1,41 @@
+<div layout="column" flex>
+    <md-toolbar>
+        <md-button class="menu" hide-gt-sm  aria-label="Show Menu">
+            <md-icon md-svg-icon="menu" ></md-icon>
+        </md-button>
+        <h1>Login</h1>
+    </md-toolbar>
+
+    <md-content layout="column" flex layout-fill class="md-padding" style="background-color: #ececec;">
+        <div flex layout-align="center center" layout-fill >
+            <!--<div flex ng-hide="cl.loaded" class="cardContent">
+                <center>
+                    <md-progress-circular style="margin-top: 40px;" md-mode="indeterminate"></md-progress-circular>
+                </center>
+            </div>-->
+            <md-card class="cardContent">
+                <md-card-content>
+                    <md-content class="md-padding">
+                        <form ng-submit="ctl.login" ng-hide="!ctl.isLoggedIn">
+                            <md-input-container md-no-float>
+                                <md-icon md-svg-icon="username" class="name"></md-icon>
+                                <input ng-model="ctl.user.name" type="text" placeholder="Name">
+                            </md-input-container>
+                            <md-input-container md-no-float>
+                                <md-icon md-svg-icon="password" class="name"></md-icon>
+                                <input ng-model="ctl.user.password" type="password" placeholder="Password">
+                            </md-input-container>
+                            <section layout="row" layout-sm="column" layout-align="center center">
+                                <md-button class="login" ng-click="ctl.login()" type="submit">Login</md-button>
+                            </section>
+                        </form>
+                        <div flex ng-hide="ctl.isLoggedIn">
+                            <span>Hello {{ctl.message}}</span>
+                            <md-button class="login" ng-click="ctl.logout()" type="submit">Logout</md-button>
+                        </div>
+                    </md-content>
+                </md-card-content>
+            </md-card>
+        </div>
+    </md-content>
+</div> 
