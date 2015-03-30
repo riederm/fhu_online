@@ -16,7 +16,8 @@
             <md-card class="cardContent">
                 <md-card-content>
                     <md-content class="md-padding">
-                        <form ng-submit="ctl.login" ng-hide="!ctl.isLoggedIn">
+                        <div flex ng-show="!ctl.isLoggedIn">
+                        <form ng-submit="ctl.login" >
                             <md-input-container md-no-float>
                                 <md-icon md-svg-icon="username" class="name"></md-icon>
                                 <input ng-model="ctl.user.name" type="text" placeholder="Name">
@@ -29,7 +30,8 @@
                                 <md-button class="login" ng-click="ctl.login()" type="submit">Login</md-button>
                             </section>
                         </form>
-                        <div flex ng-hide="ctl.isLoggedIn">
+                        </div>
+                        <div flex ng-show="ctl.isLoggedIn">
                             <span>Hello {{ctl.message}}</span>
                             <md-button class="login" ng-click="ctl.logout()" type="submit">Logout</md-button>
                         </div>

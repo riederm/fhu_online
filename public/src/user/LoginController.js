@@ -15,7 +15,8 @@
         var self = this;
 
         self.login = doLogin;
-        self.isLoggedIn = false;
+        self.logout = doLogout;
+        self.isLoggedIn = userService.isLoggedIn;
         self.status = "logged out";
 
         if (userService.displayName && userService.displayName.length > 0) {
@@ -45,6 +46,13 @@
                 if ($routeParams.returnTo) {
                     $location.path("#/" + $routeParams.returnTo);
                 }
+            });
+        }
+
+        function doLogout() {
+            userService.logout().success(function(data) {
+                self.message = "Anmelden";
+                self.isLoggedIn = false;
             });
         }
 

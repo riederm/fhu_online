@@ -21,7 +21,7 @@
             </md-item>
             <md-item>
                 <md-button >
-                        <md-icon md-svg-icon ="back"></md-icon>
+                    <md-icon md-svg-icon ="back"></md-icon>
                     zurück
                 </md-button>
             </md-item>
@@ -34,7 +34,11 @@
                 <md-icon md-svg-icon="menu" ></md-icon>
             </md-button>
             <h1>Einheit: {{cd.selected.name}}</h1>
-            
+            <md-button class="loginButton md-raised md-primary md-hue-1" ng-href="#/login?returnTo=courses">
+                <div style="margin-top: 5px;" ng-controller="LoginController as lctl">
+                    <md-icon  md-svg-icon="login" ></md-icon> {{lctl.message}}
+                </div>
+            </md-button>
         </md-toolbar>
 
 
@@ -57,7 +61,10 @@
                             <h2 class="cardtitle">{{cd.selected.headerTitle}}</h2>
                         </div>
                         <p>{{cd.selected.description}}</p>
-                        <center><youtube-video video-id="cd.selected.videoId"></youtube-video></center>
+                        <center>
+                            <!--<youtube-video video-id="cd.selected.videoId"></youtube-video>-->
+                            <embed-video iframe-id="vimeo1" api="1" player_id="vimeo1" width="740" height="420" ng-href="{{cd.selected.videoId}}"></embed-video>
+                        </center>
                         <br>
                         <md-tabs md-selected="selectedIndex" style="padding-top: 24px;" flex>
                             <md-tab>
