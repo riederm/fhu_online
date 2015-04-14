@@ -1,0 +1,29 @@
+{
+	"type": "Collection",
+	"properties": {
+		"userId": {
+			"name": "userId",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "userId",
+			"order": 0
+		},
+		"resourceId": {
+			"name": "resourceId",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "resourceId",
+			"order": 1
+		},
+		"releaseAfter": {
+			"name": "releaseAfter",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "releaseAfter",
+			"order": 2
+		}
+	}
+}

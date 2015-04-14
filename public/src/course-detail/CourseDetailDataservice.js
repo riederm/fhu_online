@@ -1,6 +1,6 @@
 (function() {
     'use strict';
-    angular.module('coursedetail')
+    angular.module('fhu')
             .service('courseDetailDataService', ['$q', '$http', CourseDetailDataService]);
     /**
      * Courses DataService
@@ -110,8 +110,14 @@
             loadAllLessons: function(key) {
                 return $http.get('/' + key);
                 
+            },
+            
+            loadLesson: function(course, lesson){
+                return $http.get('/' + course + '/' + lesson);
+                
             }
         };
+        
     }
 
 })();

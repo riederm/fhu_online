@@ -8,6 +8,14 @@
 			"required": false,
 			"id": "displayName",
 			"order": 0
+		},
+		"isAdmin": {
+			"name": "isAdmin",
+			"type": "boolean",
+			"typeLabel": "boolean",
+			"required": false,
+			"id": "isAdmin",
+			"order": 1
 		}
 	}
 }

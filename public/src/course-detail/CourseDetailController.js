@@ -1,9 +1,9 @@
 (function() {
 
     angular
-            .module('coursedetail')
+            .module('fhu')
             .controller('CourseDetailController', [
-                'courseDetailDataService', '$mdSidenav', '$mdBottomSheet', '$log', '$routeParams',
+                'courseDetailDataService', '$mdSidenav', '$mdBottomSheet', 'userService', '$routeParams',
                 CourseDetailController
             ]);
 
@@ -14,9 +14,10 @@
      * @param avatarsService
      * @constructor
      */
-    function CourseDetailController(courseDetailDataservice, $mdSidenav, $mdBottomSheet, $log, $routeParams) {
+    function CourseDetailController(courseDetailDataservice, $mdSidenav, $mdBottomSheet, userService, $routeParams) {
         var self = this;
         var courseId = $routeParams.courseId;
+        var lessonId = $routeParams.lessonId;
         
         self.courseName         = "lade Kurs...";
         self.selected           = null;
@@ -24,15 +25,26 @@
         self.toggleCoursesList  = toggleCoursesList;
         self.selectLesson       = selectLesson;
         self.loaded             = false;
+        self.user               = userService.me;
+        self.isAccessible       = isAccessible;
                
         // Load all registered courses
+//        courseDetailDataservice
+                //.loadAllLessons(courseId)
+//                .loadLesson(courseId)
+//                .then(function(lessons) {
+//                    self.lessons = lessons.data;
+//                    self.selected = self.lessons[0];
+//                    self.loaded = true;
+//                });
+                
         courseDetailDataservice
-                .loadAllLessons(courseId)
-                .then(function(lessons) {
-                    self.lessons = lessons.data;
-                    self.selected = self.lessons[0];
+                .loadLesson(courseId, lessonId)
+                .then(function(lesson){
+                    self.selected = lesson.data;
                     self.loaded = true;
-                });
+                        });
+        
 
         // *********************************
         // Internal methods
@@ -52,6 +64,10 @@
         function selectLesson(lesson) {
             self.selected = angular.isNumber(lesson) ? $scope.lessons[lesson] : lesson;
             self.toggleCoursesList();
+        }
+        
+        function isAccessible(){
+            return userService.isAccessible(self.selected.id);
         }
 
     }

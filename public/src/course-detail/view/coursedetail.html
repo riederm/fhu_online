@@ -1,121 +1,112 @@
-<div layout="row" flex>
-    <md-sidenav layout="column" md-is-locked-open="$media('gt-sm')" class="md-whiteframe-z2" md-component-id="left">
-        <md-toolbar class="md-theme-indigo">
-            <h1 class="md-toolbar-tools">
-                <a ng-href="#/home" layout="row" flex>
-                    <md-icon md-svg-icon="logo" class="logo"></md-icon>
-                    <div class="docs-logotype">Hunde Fern-Uni</div>
-                </a>
-            </h1>
-        </md-toolbar>
-        <md-toolbar class=" md-hue-1">
-            <h2 class="md-toolbar-tools" style="margin: auto; width:initial;">LEKTIONEN</h2>
-        </md-toolbar>
-        <md-list>
-            <md-item ng-repeat="it in cd.lessons">
-                <md-button ng-click="cd.selectLesson(it)" ng-class="{
-                            'selected' : it === cd.selected }">
-                    <img src="{{it.menuImg}}" alt="" class="avatar"></img>
-                    {{it.name}}
-                </md-button>
-            </md-item>
-            <md-item>
-                <md-button >
-                    <md-icon md-svg-icon ="back"></md-icon>
-                    zurück
-                </md-button>
-            </md-item>
-        </md-list>
-    </md-sidenav>
-    <div layout="column" flex >
+<div >
 
-        <md-toolbar layout="row">
-            <md-button class="menu" hide-gt-sm  aria-label="Show Menu">
-                <md-icon md-svg-icon="menu" ></md-icon>
-            </md-button>
-            <h1>Einheit: {{cd.selected.name}}</h1>
-            <md-button class="loginButton md-raised md-primary md-hue-1" ng-href="#/login?returnTo=courses">
-                <div style="margin-top: 5px;" ng-controller="LoginController as lctl">
-                    <md-icon  md-svg-icon="login" ></md-icon> {{lctl.message}}
-                </div>
-            </md-button>
-        </md-toolbar>
+    <md-card class="cardContent" ng-hide="!cd.loaded" >
 
+        <md-card-content  style="padding: 24px;">  
+            <div class="ribbon" ng-hide = "cd.isAccessible()">
+                <a href="#">Vorschau</a>
+            </div>
+            <div class="text-image-container">
+                <img  src="{{cd.selected.headerImg}}" alt=""/>
+                <h2 class="cardtitle">{{cd.selected.headerTitle}}</h2>
 
+            </div>
+            <p>{{cd.selected.description}}</p>
+            <center>
+                <!--<youtube-video video-id="cd.selected.videoId"></youtube-video>-->
+                <embed-video iframe-id="vimeo1" api="1" player_id="vimeo1" width="740" height="420" ng-href="{{cd.selected.videoId}}"></embed-video>
+            </center>
+            <br>
+            <md-tabs md-selected="selectedIndex" style="padding-top: 24px;">
+                <md-tab>
+                    <!-- ___________ INFO section ___________ -->
+                    <div flex style="min-height: 200px;">
+                        <md-tab-label >
+                            <md-icon md-svg-icon="info"></md-icon>
+                            <span>Informationen</span>
+                        </md-tab-label>
+                        <p>{{cd.selected.extendedDescription}}</p>
+                    </div>
+                </md-tab>
+                <md-tab>
+                    <!-- ___________ DOWNLOADS section ___________ -->
+                    <md-tab-label >
+                        <md-icon md-svg-icon="download"></md-icon>
+                        <span>Downloads</span>
+                    </md-tab-label>
+                    <div style="min-height: 200px;">
+                        <md-list>                                    
+                            <md-item ng-repeat="download in cd.selected.downloads">
+                                <md-item-content style="padding-left: 32px;">
+                                    <div class="md-tile-left">
+                                        <a ng-href="{{download.url}}"><md-icon md-svg-icon="download"></md-icon></a>
+                                    </div>
+                                    <div class="md-tile-content">
+                                        <a ng-href="{{download.url}}"><h3>{{download.name}}</h3></a>
+                                        <p>{{download.description}}</p>
+                                    </div>
+                                </md-item-content>
+                            </md-item>
+                        </md-list>
+                    </div>
+                </md-tab>
+                <md-tab>
+                    <!-- ___________ COMMENTS section ___________ -->
+                    <md-tab-label >
+                        <md-icon md-svg-icon="comment"></md-icon>
+                        <span>Kommentare</span>
+                    </md-tab-label>
+                    <div layout="column" style="min-height: 200px;">
+                        <md-input-container>
+                            <label>Kommentar</label>
+                            <textarea md-maxlength="600" rows="5" ng-model="comment"></textarea>
+                        </md-input-container>
 
-        <md-content layout="column" flex layout-fill class="md-padding" style="background-color: #ececec;">
-
-
-
-            <div flex layout-align="center center" layout-fill >
-                <div flex ng-hide="cd.loaded" class="cardContent">
-                    <center>
-                        <md-progress-circular style="margin-top: 40px;" md-mode="indeterminate"></md-progress-circular>
-                    </center>
-                </div>
-                <md-card class="cardContent" ng-hide="!cd.loaded" >
-                    <md-card-content  style="padding: 24px;" flex>  
-
-                        <div flex class="text-image-container">
-                            <img  src="{{cd.selected.headerImg}}" alt=""/>
-                            <h2 class="cardtitle">{{cd.selected.headerTitle}}</h2>
+                    </div>
+                </md-tab>
+                <md-tab ng-show="cd.user.isAdmin">
+                    <!-- ___________ ACCESS section ___________ -->
+                    <md-tab-label >
+                        <md-icon md-svg-icon="access"></md-icon>
+                        <span>Freigabe</span>
+                    </md-tab-label>
+                    <div layout="column" style="min-height: 200px;" ng-controller="AccessController
+                                        as ctrl">
+                        <div layout="row" layout-margin>
+                            <md-autocomplete flex
+                                             md-selected-item="ctrl.selectedItem"
+                                             md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
+                                             md-search-text="ctrl.searchText"
+                                             md-selected-item-change="ctrl.selectedItemChange(item)"
+                                             md-items="item in ctrl.querySearch(ctrl.searchText)"
+                                             md-item-text="item.username"
+                                             placeholder="Benutzer">
+                                <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.username}}</span>
+                            </md-autocomplete>
+                            <md-button 
+                                ng-disabled="!ctrl.selectedItem" 
+                                md-raised md-primary
+                                ng-click="ctrl.grantAccess(cd.selected.id, ctrl.selectedItem.id)">
+                                <span> freigeben </span>
+                            </md-button>
                         </div>
-                        <p>{{cd.selected.description}}</p>
-                        <center>
-                            <!--<youtube-video video-id="cd.selected.videoId"></youtube-video>-->
-                            <embed-video iframe-id="vimeo1" api="1" player_id="vimeo1" width="740" height="420" ng-href="{{cd.selected.videoId}}"></embed-video>
-                        </center>
-                        <br>
-                        <md-tabs md-selected="selectedIndex" style="padding-top: 24px;" flex>
-                            <md-tab>
-                                <!-- ___________ INFO section ___________ -->
-                                <div flex style="min-height: 200px;">
-                                    <md-tab-label >
-                                        <md-icon md-svg-icon="info"></md-icon>
-                                        <span>Informationen</span>
-                                    </md-tab-label>
-                                    <p>{{cd.selected.extendedDescription}}</p>
-                                </div>
-                            </md-tab>
-                            <md-tab>
-                                <!-- ___________ DOWNLOADS section ___________ -->
-                                <md-tab-label >
-                                    <md-icon md-svg-icon="download"></md-icon>
-                                    <span>Downloads</span>
-                                </md-tab-label>
-                                <div flex style="min-height: 200px;">
-                                    <md-list>                                    
-                                        <md-item ng-repeat="download in cd.selected.downloads">
-                                            <md-item-content style="padding-left: 32px;">
-                                                <div class="md-tile-left">
-                                                    <a ng-href="{{download.url}}"><md-icon md-svg-icon="download"></md-icon></a>
-                                                </div>
-                                                <div class="md-tile-content">
-                                                    <a ng-href="{{download.url}}"><h3>{{download.name}}</h3></a>
-                                                    <p>{{download.description}}</p>
-                                                </div>
-                                            </md-item-content>
-                                        </md-item>
-                                    </md-list>
-                                </div>
-                            </md-tab>
-                            <md-tab>
-                                <!-- ___________ COMMENTS section ___________ -->
-                                <md-tab-label >
-                                    <md-icon md-svg-icon="comment"></md-icon>
-                                    <span>Kommentare</span>
-                                </md-tab-label>
-                                <div flex layout="column" style="min-height: 200px;">
-                                    <md-input-container>
-                                        <label>Kommentar</label>
-                                        <textarea md-maxlength="600" rows="5" ng-model="comment"></textarea>
-                                    </md-input-container>
+                        <div layout="row" layout-margin>
+                            <ul style="list-style:none;">
+                                <li ng-repeat="user in ctrl.getGrantedUsers(cd.selected.id)| orderBy:'userName'"">
+                                <td><md-icon md-svg-icon="user"></md-icon>
+                                <span layout-margin style="width:200px;"> {{user.userName}} </span>
+                                <md-button 
+                                    md-raised md-primary
+                                    ng-click="ctrl.removeAccess(user.id, cd.selected.id)"
+                                    class="md-warn">
+                                    entfernen
+                                </md-button> 
+                                </li>
+                            </ul>
 
-                                </div>
-                            </md-tab>
-                        </md-tabs>
-                    </md-card-content>
-                </md-card>
-        </md-content>
-    </div>
+                        </div>
+                </md-tab>
+            </md-tabs>
+        </md-card-content>
+    </md-card>
 </div>

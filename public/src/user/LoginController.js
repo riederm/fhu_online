@@ -1,8 +1,8 @@
 (function() {
 
     angular
-            .module('courses')
-            .controller('LoginController', ['userService', '$routeParams', '$location',
+            .module('fhu')
+            .controller('LoginController', ['userService', '$routeParams', '$location', '$scope',
                 LoginController
             ]);
 
@@ -11,7 +11,7 @@
      * the user controller
      * @returns {undefined}
      */
-    function LoginController(userService, $routeParams, $location) {
+    function LoginController(userService, $routeParams, $location, $scope) {
         var self = this;
 
         self.login = doLogin;
@@ -32,17 +32,23 @@
 
         userService.fetchCurrentUser().success(
                 function(data) {
-                    if (data && data.displayName) {
+                   if (data && data.displayName) {
                         self.isLoggedIn = true;
                         self.message = data.displayName;
+                        userService.me = data;
                     }
                 });
 
         function doLogin() {
             userService.login(self.user.name, self.user.password).success(function(data) {
-                self.message = userService.displayName;
-                userService.displayName = self.user.name;
-                self.isLoggedIn = true;
+                $scope.$apply(function() {
+                    self.message = userService.displayName;
+                    userService.me = self.user;
+                    userService.displayName = self.user.name;
+                    self.isLoggedIn = true;
+
+
+                });
                 if ($routeParams.returnTo) {
                     $location.path("#/" + $routeParams.returnTo);
                 }

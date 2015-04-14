@@ -17,13 +17,21 @@
 			"id": "description",
 			"order": 1
 		},
+		"menuImg": {
+			"name": "menuImg",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "menuImg",
+			"order": 2
+		},
 		"img": {
 			"name": "img",
 			"type": "string",
 			"typeLabel": "string",
 			"required": false,
 			"id": "img",
-			"order": 2
+			"order": 3
 		},
 		"resource": {
 			"name": "resource",
@@ -31,7 +39,7 @@
 			"typeLabel": "string",
 			"required": false,
 			"id": "resource",
-			"order": 3
+			"order": 4
 		}
 	}
 }

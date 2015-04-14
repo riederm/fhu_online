@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    angular.module('courses')
+    angular.module('fhu')
             .service('coursesService', ['$q', '$http', CoursesDataservice]);
 
     /**

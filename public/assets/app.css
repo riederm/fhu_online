@@ -108,8 +108,8 @@ md-toolbar h1 {
 
 .avatar {
     position: relative;
-    width: 128px;
-    height: 128px;
+    width: 90px;
+    height: 90px;
     border: 1px solid #ddd;
     border-radius: 50%;
     display: inline-block;
@@ -145,7 +145,7 @@ md-toolbar h1 {
 
 }
 
-.cardContent button{
+.cardContent title-button{
     width: 100%;
     min-height: 3em;
     text-align: left;
@@ -238,4 +238,99 @@ body{
     margin-right: 20px;
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+
+.docs-menu li.parentActive,
+.docs-menu li.parentActive .menu-toggle-list {
+  background-color: #f6f6f6;
+}
+.menu-toggle-list {
+  background: #fff;
+  max-height: 1300px;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  -webkit-transition: 1s cubic-bezier(0.35, 0, 0.25, 1);
+  -webkit-transition-property: max-height;
+  -moz-transition: 1s cubic-bezier(0.35, 0, 0.25, 1);
+  -moz-transition-property: max-height;
+  transition: 1s cubic-bezier(0.35, 0, 0.25, 1);
+  transition-property: max-height;
+}
+.menu-toggle-list.ng-hide {
+  max-height: 0;
+}
+.docs-menu .menu-toggle-list a.md-button {
+  display: block;
+  font-weight: 400;
+  padding: 0 16px 0 32px;
+  text-transform: none;
+}
+.md-toggle-icon {
+  display: block;
+  margin-left: auto;
+  speak: none;
+  vertical-align: middle;
+  transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+  transition: transform 0.3s ease-in-out;
+  -webkit-transition: -webkit-transform 0.3s ease-in-out;
+}
+
+.md-toggle-icon.toggled {
+  transform: rotate(0deg);
+  -webkit-transform: rotate(0deg);
+      zoom:1.2;
+    transform: translateZ(0);
+    -webkit-transform: scale(1.20);
+    -moz-transform:scale(1.20);
+}
+
+.sub-menu{
+    list-style: none; 
+    padding: 0; 
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 25px;
+    background-color: #ffffff;
+}
+
+.sub-menu-item{
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.ribbon {
+  background-color: #a00;
+  overflow: hidden;
+  white-space: nowrap;
+  /* top left corner */
+  position: absolute;
+  left: -70px;
+  top: 40px;
+  /* 45 deg ccw rotation */
+  -webkit-transform: rotate(-45deg);
+     -moz-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+       -o-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+  /* shadow */
+  -webkit-box-shadow: 0 0 10px #888;
+     -moz-box-shadow: 0 0 10px #888;
+          box-shadow: 0 0 10px #888;
+  z-index: 99;
+}
+.ribbon a {
+  border: 1px solid #faa;
+  color: #fff;
+  display: block;
+  font: bold 81.25% 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  margin: 1px 0;
+  padding: 15px 80px;
+  text-align: center;
+  text-decoration: none;
+  /* shadow */
+  text-shadow: 0 0 5px #444;
+  font-size: 25px;
 }
