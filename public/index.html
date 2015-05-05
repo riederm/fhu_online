@@ -27,18 +27,17 @@
                 </a>
             </h1>
         </md-toolbar>
+        <!-- the side menu --> 
         <md-list ng-controller="CoursesController as cc">
             <md-list-item ng-repeat="it in cc.courses" md-expando>
                 <md-button ng-click="cc.select(it)" ng-class="{
                             'selected' : it === cc.selected }">
-                    <div flex layout="row" layout-align="center center">
+                    <div flex layout="row" layout-align="center center" ng-class="{'disabled' : !it.isAccessible}">
                         <img src="{{it.menuImg}}" alt="" class="avatar"></img>
                         <span>
                             {{it.name}}
                         </span>
-                        <span style="padding-left: 8px;" ng-show="cc.isAccessible(it.id)">
-                            <md-icon md-svg-icon="lock-open" style="width:14px; height: 14px;"></md-icon>
-                        </span>
+                       
                         <span flex></span>
                         <span class="md-toggle-icon" ng-class="{'toggled' : it === cc.selected}">
                             <md-icon md-svg-icon="expand" ></md-icon>
@@ -47,17 +46,16 @@
                 </md-button>
                 <ul ng-show="it === cc.selected" class="menu-toggle-list sub-menu">
                     <md-button ng-repeat="lesson in it.lessons" md-hue-3 ng-click="cc.selectLesson(it.resource, lesson.id)">
-                        <div flex layout="row" layout-align="center center" >
+                        <div flex layout="row" layout-align="center center" ng-class="{'disabled': !lesson.isAccessible}">
                             <md-icon  md-svg-icon="lesson" style="margin-right: 15px;"></md-icon>
                             <span>{{lesson.name}}</span>
-                            <span style="padding-left: 8px;" ng-show="cc.isAccessible(lesson.id)">
+                            <span style="padding-left: 8px;" ng-show="lesson.isAccessible">
                                 <md-icon md-svg-icon="lock-open" style="width:20px; height: 20px;"></md-icon>
                             </span>
                             <span flex></span>
                         </div>
                     </md-button>
                 </ul>
-
             </md-list-item>
         </md-list>
     </md-sidenav>
@@ -86,6 +84,7 @@
 
 </body>
 <script src="./bower_components/angular/angular.js"></script>
+<script src="./bower_components/underscore/underscore-min.js"></script>
 
 <script src="./bower_components/angular-animate/angular-animate.js"></script>
 <script src="./bower_components/angular-aria/angular-aria.js"></script>
@@ -113,60 +112,60 @@
 
 
 <script type="text/javascript">
+    angular
+    .module('app', ['fhu', 'ngMaterial', 'ngAnimate', 'youtube-embed', 'videosharing-embed', 'ngRoute'])
+    .config(function($mdThemingProvider, $mdIconProvider, $routeProvider, $httpProvider) {
 
+    $httpProvider.defaults.withCredentials = true;
+            $mdIconProvider
+            .defaultIconSet("./assets/svg/avatars.svg", 128)
+            .icon("courses", "./assets/svg/ic_play_circle_fill_48px.svg", 24)
+            .icon("menu", "./assets/svg/menu.svg", 24)
+            .icon("share", "./assets/svg/share.svg", 24)
+            .icon("logo", "./assets/svg/ic_school_48px.svg", 50)
+            .icon("back", "./assets/svg/ic_chefron_left_24px.svg", 50)
+            .icon("password", "./assets/svg/ic_lock_24px.svg", 24)
+            .icon("username", "./assets/svg/ic_account_circle_24px.svg", 24)
+            .icon("login", "./assets/svg/ic_account_box_24px.svg", 32)
 
-                                    angular
-                                    .module('app', ['fhu', 'ngMaterial', 'ngAnimate', 'youtube-embed', 'videosharing-embed', 'ngRoute'])
-                                    .config(function($mdThemingProvider, $mdIconProvider, $routeProvider, $httpProvider) {
-
-                                    $httpProvider.defaults.withCredentials = true;
-                                            $mdIconProvider
-                                            .defaultIconSet("./assets/svg/avatars.svg", 128)
-                                            .icon("courses", "./assets/svg/ic_play_circle_fill_48px.svg", 24)
-                                            .icon("menu", "./assets/svg/menu.svg", 24)
-                                            .icon("share", "./assets/svg/share.svg", 24)
-                                            .icon("logo", "./assets/svg/ic_school_48px.svg", 50)
-                                            .icon("back", "./assets/svg/ic_chefron_left_24px.svg", 50)
-                                            .icon("password", "./assets/svg/ic_lock_24px.svg", 24)
-                                            .icon("username", "./assets/svg/ic_account_circle_24px.svg", 24)
-                                            .icon("login", "./assets/svg/ic_account_box_24px.svg", 32)
-
-                                            .icon("info", "./assets/svg/ic_info_outline_24px.svg", 48)
-                                            .icon("download", "./assets/svg/ic_file_download_24px.svg", 48)
-                                            .icon("comment", "./assets/svg/ic_comment_24px.svg", 48)
-                                            .icon("expand", "./assets/svg/ic_expand_more_18px.svg", 24)
-                                            .icon("collapse", "./assets/svg/ic_expand_less_18px.svg", 24)
-                                            .icon("lesson", "./assets/svg/ic_event_note_24px.svg", 24)
-                                            .icon("access", "./assets/svg/ic_lock_outline_24px.svg", 24)
-                                            .icon("lock", "./assets/svg/ic_lock_outline_24px.svg", 24)
-                                            .icon("lock-open", "./assets/svg/ic_lock_open_24px.svg", 24)
-                                            .icon("user", "./assets/svg/ic_person_18px.svg", 24)
-                                            .icon("remove", "./assets/svg/ic_highlight_remove_24px.svg", 24)
-                                            ;
-                                            $mdThemingProvider.theme('default')
-                                            .primaryPalette('amber')
-                                            .accentPalette('orange');
-                                            $routeProvider.
-                                            when('/courses', {
-                                            templateUrl: 'src/courses/view/courselist.html',
-                                                    controller: 'CoursesController as cl'
-                                            }).
-                                            when('/courseDetail/:courseId/:lessonId', {
-                                            templateUrl: 'src/course-detail/view/coursedetail.html',
-                                                    controller: 'CourseDetailController as cd'
-                                            }).
-                                            when('/login', {
-                                            templateUrl: 'src/user/view/login.html',
-                                                    controller: 'LoginController as ctl'
-                                            }).
-                                            //when('/phones/:phoneId', {
-                                            //  templateUrl: 'partials/phone-detail.html',
-                                            // controller: 'PhoneDetailCtrl'
-                                            //}).
-                                            otherwise({
-                                            redirectTo: '/courses'
-                                            });
-                                    });</script>
+            .icon("info", "./assets/svg/ic_info_outline_24px.svg", 48)
+            .icon("download", "./assets/svg/ic_file_download_24px.svg", 48)
+            .icon("comment", "./assets/svg/ic_comment_24px.svg", 48)
+            .icon("expand", "./assets/svg/ic_expand_more_18px.svg", 24)
+            .icon("collapse", "./assets/svg/ic_expand_less_18px.svg", 24)
+            .icon("lesson", "./assets/svg/ic_event_note_24px.svg", 24)
+            .icon("access", "./assets/svg/ic_lock_outline_24px.svg", 24)
+            .icon("lock", "./assets/svg/ic_lock_outline_24px.svg", 24)
+            .icon("lock-open", "./assets/svg/ic_lock_open_24px.svg", 24)
+            .icon("user", "./assets/svg/ic_person_18px.svg", 24)
+            .icon("remove", "./assets/svg/ic_highlight_remove_24px.svg", 24)
+            .icon("attachment", "./assets/svg/ic_attachment_24px.svg", 24)
+            ;
+            $mdThemingProvider.theme('default')
+            .primaryPalette('amber')
+            .accentPalette('orange');
+            $routeProvider.
+            when('/courses', {
+            templateUrl: 'src/courses/view/courselist.html',
+                    controller: 'CoursesController as cl'
+            }).
+            when('/courseDetail/:courseId/:lessonId', {
+            templateUrl: 'src/course-detail/view/coursedetail.html',
+                    controller: 'CourseDetailController as cd'
+            }).
+            when('/login', {
+            templateUrl: 'src/user/view/login.html',
+                    controller: 'LoginController as ctl'
+            }).
+            //when('/phones/:phoneId', {
+            //  templateUrl: 'partials/phone-detail.html',
+            // controller: 'PhoneDetailCtrl'
+            //}).
+            otherwise({
+            redirectTo: '/courses'
+            });
+    });
+</script>
 
 </body>
 </html>

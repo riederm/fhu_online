@@ -334,3 +334,7 @@ body{
   text-shadow: 0 0 5px #444;
   font-size: 25px;
 }
+
+.disabled{
+    color: #999;
+}

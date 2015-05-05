@@ -1,10 +1,11 @@
+/// <reference path="../../typings/underscore/underscore.d.ts"/>
 (function() {
     'use strict';
 
     angular.module('fhu')
-            .service('userService', ['$q', '$http', userService]);
+            .service('userService', ['$q', '$http',  userService]);
 
-    function userService($q, $http) {
+    function userService($q, $http, $rootScope) {
         var self = this;
         self.login = doLogin;
         self.sessionId = "";
@@ -18,8 +19,10 @@
         self.allUsers = getAllUsers;
         self.grantAccess = grantAccess;
         self.isAccessible = isAccessible;
+        self.isCourseAccessible = isCourseAccessible;
         self.removeAccess = removeAccess;
         self.updateMyLessons = updateMyLessons;
+        
 
         function doLogin(username, password) {
             return $http.post('/users/login', {
@@ -57,6 +60,17 @@
 
         function removeAccess(id) {
             return $http.delete('/access/' + id);
+        }
+        
+        function isCourseAccessible(course){
+            if (course.lessons && course.lessons.length > 0){
+                var lessons = course.lessons;
+                
+                return _.some(lessons, function(lesson){
+                     return self.isAccessible(lesson.id);
+                });
+            }
+            return false;
         }
 
         function isAccessible(lessonId) {

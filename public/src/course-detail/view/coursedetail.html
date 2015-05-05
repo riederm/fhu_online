@@ -9,17 +9,17 @@
             <div class="text-image-container">
                 <img  src="{{cd.selected.headerImg}}" alt=""/>
                 <h2 class="cardtitle">{{cd.selected.headerTitle}}</h2>
-
             </div>
-            <p>{{cd.selected.description}}</p>
-            <center>
-                <!--<youtube-video video-id="cd.selected.videoId"></youtube-video>-->
-                <embed-video iframe-id="vimeo1" api="1" player_id="vimeo1" width="740" height="420" ng-href="{{cd.selected.videoId}}"></embed-video>
-            </center>
-            <br>
-            <md-tabs md-selected="selectedIndex" style="padding-top: 24px;">
-                <md-tab>
-                    <!-- ___________ INFO section ___________ -->
+            <div ng-repeat="section in cd.selected.content">
+                <p ng-if="section.type ==='text'">{{section.content}}< /p>
+                <center ng-if ="section.type ==='video'">
+                    <!--<youtube-video video-id="cd.selected.videoId"></youtube-video>-->
+                <embed-video iframe-id="vimeo1" api="1" player_id="vimeo1" width="740" height="420" ng-href="{{section.content}}"></embed-video>
+                </center>
+            </div>
+            <md-tabs md-selected="selectedIndex">
+                <!--<md-tab>
+                    <!--- ___________ INFO section ___________
                     <div flex style="min-height: 200px;">
                         <md-tab-label >
                             <md-icon md-svg-icon="info"></md-icon>
@@ -27,11 +27,11 @@
                         </md-tab-label>
                         <p>{{cd.selected.extendedDescription}}</p>
                     </div>
-                </md-tab>
+                </md-tab>-->
                 <md-tab>
                     <!-- ___________ DOWNLOADS section ___________ -->
                     <md-tab-label >
-                        <md-icon md-svg-icon="download"></md-icon>
+                        <md-icon md-svg-icon="attachment"></md-icon>
                         <span>Downloads</span>
                     </md-tab-label>
                     <div style="min-height: 200px;">
@@ -105,6 +105,7 @@
                             </ul>
 
                         </div>
+                    </div>
                 </md-tab>
             </md-tabs>
         </md-card-content>
