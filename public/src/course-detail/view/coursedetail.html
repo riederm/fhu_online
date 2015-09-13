@@ -1,111 +1,132 @@
-<div >
-
-    <md-card class="cardContent" ng-hide="!cd.loaded" >
-
-        <md-card-content  style="padding: 24px;">  
-            <div class="ribbon" ng-hide = "cd.isAccessible()">
+<div>
+    <md-card class="cardContent" ng-hide="!cd.loaded">
+        <md-card-content style="padding: 24px;">
+            <div class="ribbon" ng-hide="cd.isAccessible()">
                 <a href="#">Vorschau</a>
             </div>
+            <div layout="row" ng-if="cd.isAdmin()" flex>
+                <md-switch ng-model="cd.editMode" aria-label="Editiermodus" ng-change="cd.editModeChanged()">Editiermodus</md-switch>
+                <span flex></span>
+            </div>
             <div class="text-image-container">
-                <img  src="{{cd.selected.headerImg}}" alt=""/>
-                <h2 class="cardtitle">{{cd.selected.headerTitle}}</h2>
+                <img src="{{cd.selected.headerImg}}" alt="" />
+                <h2 ng-if="!cd.editMode" class="cardtitle">{{ :: cd.selected.headerTitle}}</h2>
+                <md-input-container ng-if="cd.editMode">
+                    <label>Titel</label>
+                    <input ng-model="cd.selected.headerTitle">
+                </md-input-container>
             </div>
-            <div ng-repeat="section in cd.selected.content">
-                <p ng-if="section.type ==='text'">{{section.content}}< /p>
-                <center ng-if ="section.type ==='video'">
-                    <!--<youtube-video video-id="cd.selected.videoId"></youtube-video>-->
-                <embed-video iframe-id="vimeo1" api="1" player_id="vimeo1" width="740" height="420" ng-href="{{section.content}}"></embed-video>
-                </center>
+            <div ng-repeat="section in cd.selected.content track by $index">
+                <div layout="row" flex ng-if="cd.editMode" layout-margin>
+                    <span flex></span>
+                    <md-button class="md-raised">+ Text</md-button>
+                    <md-button class="md-raised">+ Video</md-button>
+                    </center>8
+                </div>
+                <p ng-if="section.type ==='text' && !cd.editMode">{{ :: section.content}}</p>
+                <md-input-container ng-if="cd.editMode && section.type ==='text'">
+                    <label>Text</label>
+                    <textarea rows="10" ng-model="section.content"></textarea>
+                </md-input-container>
+                <div ng-if="section.type ==='video'">
+                    <center>
+                        <!--<youtube-video video-id="cd.selected.videoId"></youtube-video>-->
+                        <embed-video ng-if="!cd.editMode" iframe-id="vimeo1" api="1" player_id="vimeo1" width="740" height="420" ng-href="{{section.content}}"></embed-video>
+                    </center>
+                    <md-input-container ng-if="cd.editMode">
+                        <label>VideoLink</label>
+                        <input ng-model="section.content">
+                    </md-input-container>
+                </div>
             </div>
-            <md-tabs md-selected="selectedIndex">
-                <!--<md-tab>
-                    <!--- ___________ INFO section ___________
-                    <div flex style="min-height: 200px;">
-                        <md-tab-label >
-                            <md-icon md-svg-icon="info"></md-icon>
-                            <span>Informationen</span>
-                        </md-tab-label>
-                        <p>{{cd.selected.extendedDescription}}</p>
-                    </div>
-                </md-tab>-->
-                <md-tab>
-                    <!-- ___________ DOWNLOADS section ___________ -->
-                    <md-tab-label >
-                        <md-icon md-svg-icon="attachment"></md-icon>
-                        <span>Downloads</span>
-                    </md-tab-label>
-                    <div style="min-height: 200px;">
-                        <md-list>                                    
-                            <md-item ng-repeat="download in cd.selected.downloads">
-                                <md-item-content style="padding-left: 32px;">
-                                    <div class="md-tile-left">
-                                        <a ng-href="{{download.url}}"><md-icon md-svg-icon="download"></md-icon></a>
-                                    </div>
-                                    <div class="md-tile-content">
-                                        <a ng-href="{{download.url}}"><h3>{{download.name}}</h3></a>
-                                        <p>{{download.description}}</p>
-                                    </div>
-                                </md-item-content>
-                            </md-item>
-                        </md-list>
-                    </div>
-                </md-tab>
+            <md-tabs md-selected="selectedIndex" md-dynamic-height md-border-bottom>
                 <md-tab>
                     <!-- ___________ COMMENTS section ___________ -->
-                    <md-tab-label >
+                    <md-tab-label>
                         <md-icon md-svg-icon="comment"></md-icon>
                         <span>Kommentare</span>
                     </md-tab-label>
-                    <div layout="column" style="min-height: 200px;">
-                        <md-input-container>
-                            <label>Kommentar</label>
-                            <textarea md-maxlength="600" rows="5" ng-model="comment"></textarea>
-                        </md-input-container>
-
-                    </div>
+                    <md-tab-body>
+                        <md-content layout="column" flex layout-margin ng-controller="CommentsController as commentsCtl">
+                            <md-list>
+                                <md-list-item class="md-2-line" ng-repeat="c in commentsCtl.comments track by $index">
+                                    <md-icon md-svg-icon="username"></md-icon>
+                                    <div class="md-list-item-text">
+                                        <h3>{{ :: c.userName }}</h3> <span am-time-ago="c.creationDate"></span>
+                                        <p>{{ :: c.comment }}</p>
+                                    </div>
+                                </md-list-item>
+                            </md-list>
+                            <div layout="row" style="min-height: 120px;" layout-margin>
+                                <md-input-container flex>
+                                    <label>Kommentar</label>
+                                    <textarea md-maxlength="600" rows="3" ng-model="commentsCtl.comment"></textarea>
+                                </md-input-container>
+                                <div>
+                                    <md-button class="md-raised" ng-click="commentsCtl.addComment()">
+                                        <md-icon md-svg-icon="comment"></md-icon>senden</md-button>
+                                </div>
+                            </div>
+                        </md-content>
+                    </md-tab-body>
+                </md-tab>
+                <md-tab>
+                    <!-- ___________ DOWNLOADS section ___________ -->
+                    <md-tab-label>
+                        <md-icon md-svg-icon="attachment"></md-icon>
+                        <span>Downloads</span>
+                    </md-tab-label>
+                    <md-tab-body>
+                        <div style="min-height: 200px;">
+                            <md-list>
+                                <md-item ng-repeat="download in cd.selected.downloads track by $index">
+                                    <md-item-content style="padding-left: 32px;">
+                                        <div class="md-tile-left">
+                                            <a ng-href="{{download.url}}"><md-icon md-svg-icon="download"></md-icon></a>
+                                        </div>
+                                        <div class="md-tile-content">
+                                            <a ng-href="{{download.url}}"><h3>{{ :: download.name}}</h3></a>
+                                            <p>{{ :: download.description}}</p>
+                                        </div>
+                                    </md-item-content>
+                                </md-item>
+                            </md-list>
+                        </div>
+                    </md-tab-body>
                 </md-tab>
                 <md-tab ng-show="cd.user.isAdmin">
                     <!-- ___________ ACCESS section ___________ -->
-                    <md-tab-label >
+                    <md-tab-label>
                         <md-icon md-svg-icon="access"></md-icon>
                         <span>Freigabe</span>
                     </md-tab-label>
-                    <div layout="column" style="min-height: 200px;" ng-controller="AccessController
+                    <md-tab-body>
+                        <div layout="column" style="min-height: 200px;" ng-controller="AccessController
                                         as ctrl">
-                        <div layout="row" layout-margin>
-                            <md-autocomplete flex
-                                             md-selected-item="ctrl.selectedItem"
-                                             md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
-                                             md-search-text="ctrl.searchText"
-                                             md-selected-item-change="ctrl.selectedItemChange(item)"
-                                             md-items="item in ctrl.querySearch(ctrl.searchText)"
-                                             md-item-text="item.username"
-                                             placeholder="Benutzer">
-                                <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.username}}</span>
-                            </md-autocomplete>
-                            <md-button 
-                                ng-disabled="!ctrl.selectedItem" 
-                                md-raised md-primary
-                                ng-click="ctrl.grantAccess(cd.selected.id, ctrl.selectedItem.id)">
-                                <span> freigeben </span>
-                            </md-button>
+                            <md-input-container>
+                                <label>Filter</label>
+                                <input ng-model="filterText">
+                            </md-input-container>
+                            <div layout="row" layout-margin>
+                                <div style="min-height: 400px; max-height: 400px; overflow: scroll;" flex>
+                                    <table style="margin-left: 20px;">
+                                        <tr ng-repeat="user in ctrl.getGrantedUsers(cd.selected.id) track by $index | orderBy:'userName' | filter:filterText">
+                                            <td>
+                                                <md-switch aria-label="switch" ng-model="user.access"></md-switch>
+                                            </td>
+                                            <td>
+                                                <md-icon md-svg-icon="user"></md-icon>
+                                                <span layout-margin style="width:200px;">{{user.user.username}}</span>
+                                            </td>
+                                            <td>
+                                                <span ng-if="user.access">freigegeben</span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
-                        <div layout="row" layout-margin>
-                            <ul style="list-style:none;">
-                                <li ng-repeat="user in ctrl.getGrantedUsers(cd.selected.id)| orderBy:'userName'"">
-                                <td><md-icon md-svg-icon="user"></md-icon>
-                                <span layout-margin style="width:200px;"> {{user.userName}} </span>
-                                <md-button 
-                                    md-raised md-primary
-                                    ng-click="ctrl.removeAccess(user.id, cd.selected.id)"
-                                    class="md-warn">
-                                    entfernen
-                                </md-button> 
-                                </li>
-                            </ul>
-
-                        </div>
-                    </div>
+                    </md-tab-body>
                 </md-tab>
             </md-tabs>
         </md-card-content>

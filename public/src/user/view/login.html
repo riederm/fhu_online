@@ -24,9 +24,11 @@
                             </section>
                         </form>
                         </div>
-                        <div flex ng-show="ctl.isLoggedIn">
-                            <span>Hello {{ctl.message}}</span>
-                            <md-button class="login" ng-click="ctl.logout()" type="submit">Logout</md-button>
+                        <div flex ng-show="ctl.isLoggedIn" layout="column" flex>
+                            <span>Hallo {{ctl.message}}, folgende Module sind für dich freigegeben:</span>
+                             <section layout="row" layout-sm="column" layout-align="center center">
+                                <md-button class="login" ng-click="ctl.logout()" type="submit">Logout</md-button>
+                            </section>
                         </div>
                     </md-content>
                 </md-card-content>

@@ -1,7 +1,7 @@
 (function() {
     'use strict';
     angular.module('fhu')
-            .service('courseDetailDataService', ['$q', '$http', CourseDetailDataService]);
+            .service('courseDetailDataService', ['$q', '$http', '$routeParams', CourseDetailDataService]);
     /**
      * Courses DataService
      * Courses embedded, hard-coded data model; acts asynchronously to simulate
@@ -21,6 +21,10 @@
             loadLesson: function(course, lesson){
                 return $http.get('/' + course + '/' + lesson);
                 
+            },
+            
+            saveLesson : function(course, lesson){
+                return $http.put('/' + course + '/', lesson);
             }
         };
         

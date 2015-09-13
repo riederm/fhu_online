@@ -1,8 +1,10 @@
+/// <reference path="../../typings/underscore/underscore.d.ts"/>
+/// <reference path="../../typings/angularjs/angular.d.ts"/>
 (function() {
 
     angular
             .module('fhu')
-            .controller('AccessController', ['userService', '$routeParams', '$location', '$scope',
+            .controller('AccessController', ['userService', '$routeParams', '$location', '$scope', 'accessService',
                 AccessController
             ]);
 
@@ -11,7 +13,7 @@
      * the user controller
      * @returns {undefined}
      */
-    function AccessController(userService, $routeParams, $location, $scope) {
+    function AccessController(userService, $routeParams, $location, $scope, accessService) {
         var self = this;
 
         self.allUsers = [];
@@ -28,7 +30,10 @@
         self.access = {};
 
         userService.allUsers().success(function(users) {
-            self.allUsers = users;
+            self.allUsers = _.object(
+                _.map(users, function(user){ return user.id; }), 
+                _.map(users, function(user){ return user; })
+                );
         });
 
         function searchTextChange(searchText) {
@@ -51,18 +56,27 @@
                 getGrantedUsers(lessonId, true);
             });
         }
-        
-        
 
         function getGrantedUsers(lessonId, force) {
-            if (self.access[lessonId] && !force) {
-                return self.access[lessonId];
+            if (lessonId){
+                if (self.access[lessonId] && !force) {
+                    return self.access[lessonId];
+                }
+    
+                self.access[lessonId] = [];
+                accessService.getAccessOf(lessonId).success(function(data) {
+                    //{"userId":"...","resourceId":"...","id":"..."}
+                    self.access[lessonId] = _.map(self.allUsers, function(o) { 
+                        var user = {
+                            user: o,
+                            access : _.some(data, function(a) { return a.userId === o.id;})
+                        };
+                        return user;
+                        //return self.allUsers[o.userId];
+                    });
+                    var x = 3;
+                });
             }
-
-            self.access[lessonId] = [];
-            userService.acessOfLesson(lessonId).success(function(data) {
-                self.access[lessonId] = data;
-            });
         }
 
         function removeAccess(id, lessonId) {

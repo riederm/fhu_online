@@ -3,7 +3,7 @@
     angular
             .module('fhu')
             .controller('CourseDetailController', [
-                'courseDetailDataService', '$mdSidenav', '$mdBottomSheet', 'userService', '$routeParams',
+                'courseDetailDataService', '$mdSidenav', '$mdBottomSheet', 'userService', '$routeParams','$mdToast',
                 CourseDetailController
             ]);
 
@@ -14,19 +14,22 @@
      * @param avatarsService
      * @constructor
      */
-    function CourseDetailController(courseDetailDataservice, $mdSidenav, $mdBottomSheet, userService, $routeParams) {
+    function CourseDetailController(courseDetailDataservice, $mdSidenav, $mdBottomSheet, userService, $routeParams, $mdToast) {
         var self = this;
         var courseId = $routeParams.courseId;
         var lessonId = $routeParams.lessonId;
-        
+       
         self.courseName         = "lade Kurs...";
         self.selected           = null;
         self.lessons            = [];
-        self.toggleCoursesList  = toggleCoursesList;
         self.selectLesson       = selectLesson;
         self.loaded             = false;
         self.user               = userService.me;
         self.isAccessible       = isAccessible;
+        self.isAdmin            = isAdmin;
+        self.editMode           = false;
+        self.editModeChanged    = editModeChanged;
+        
                
         // Load all registered courses
 //        courseDetailDataservice
@@ -46,17 +49,6 @@
                         });
         
 
-        // *********************************
-        // Internal methods
-        // *********************************
-
-        /**
-         * Hide or Show the 'left' sideNav area
-         */
-        function toggleCoursesList() {
-            //$mdSidenav('left').toggle();
-        }
-
         /**
          * Select the current avatars
          * @param lesson
@@ -67,7 +59,27 @@
         }
         
         function isAccessible(){
-            return userService.isAccessible(self.selected.id);
+            return self.selected && self.selected.id
+                    && userService.isAccessible(self.selected.id);
+        }
+        
+        function isAdmin(){
+            return userService.me.isAdmin;
+        }
+        
+        function editModeChanged(){
+            if (!self.editMode){
+                //save changes to server
+                courseDetailDataservice
+                    .saveLesson(courseId, self.selected)
+                    .then(function(savedLesson){
+                        $mdToast.show($mdToast.simple()
+                            .content('erfolgreich gespeichert')
+                            .position('top right')
+                            .hideDelay(3000)
+                        );
+                    });
+            }
         }
 
     }

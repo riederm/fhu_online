@@ -17,10 +17,8 @@
         self.logout = doLogout;
         self.fetchCurrentUser = fetchCurrentUser;
         self.allUsers = getAllUsers;
-        self.grantAccess = grantAccess;
         self.isAccessible = isAccessible;
         self.isCourseAccessible = isCourseAccessible;
-        self.removeAccess = removeAccess;
         self.updateMyLessons = updateMyLessons;
         
 
@@ -50,17 +48,6 @@
         function getAllUsers() {
             return $http.get('/users');
         }
-
-        function grantAccess(lessonId, userId) {
-            return $http.post('/access', {
-                userId: userId,
-                resourceId: lessonId
-            });
-        }
-
-        function removeAccess(id) {
-            return $http.delete('/access/' + id);
-        }
         
         function isCourseAccessible(course){
             if (course.lessons && course.lessons.length > 0){
@@ -75,7 +62,7 @@
 
         function isAccessible(lessonId) {
             if (self.me && self.me.access) {
-                return self.me.access.indexOf(lessonId) >= 0;
+                return self.me.isAdmin || self.me.access.indexOf(lessonId) >= 0;
             }
             return false;
         }

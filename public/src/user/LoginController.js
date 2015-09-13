@@ -2,7 +2,7 @@
 
     angular
             .module('fhu')
-            .controller('LoginController', ['userService', '$routeParams', '$location', '$scope', '$rootScope',
+            .controller('LoginController', ['userService', '$routeParams', '$location', '$scope', '$rootScope', '$mdToast',
                 LoginController
             ]);
 
@@ -11,12 +11,13 @@
      * the user controller
      * @returns {undefined}
      */
-    function LoginController(userService, $routeParams, $location, $scope, $rootScope) {
+    function LoginController(userService, $routeParams, $location, $scope, $rootScope, $mdToast) {
         var self = this;
 
         self.login = doLogin;
         self.logout = doLogout;
         self.isLoggedIn = userService.isLoggedIn;
+        self.getMessage = getMessage;
         
         if (userService.displayName && userService.displayName.length > 0) {
             self.message = userService.displayName;
@@ -28,6 +29,13 @@
             name: userService.username,
             password: ""
         };
+        
+        function getMessage(){
+            if (userService.displayName && userService.displayName.length > 0){
+                return userService.displayName;    
+            }
+            return "Anmelden";
+        }
 
         function fetchCurrentUser(){
             userService.fetchCurrentUser().success(
@@ -66,6 +74,13 @@
                     $location.path("#/" + $routeParams.returnTo);
                 }
                 $rootScope.$broadcast('userChangedEvent');
+            }).error(function(){
+                $mdToast.show(
+                  $mdToast.simple()
+                    .content('Login fehlgeschlagen')
+                    .position('top right')
+                    .hideDelay(3000)
+                );
             });
         }
 

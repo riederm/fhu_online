@@ -1,0 +1,37 @@
+{
+	"type": "Collection",
+	"properties": {
+		"authorId": {
+			"name": "authorId",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "authorId",
+			"order": 0
+		},
+		"creationDate": {
+			"name": "creationDate",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "creationDate",
+			"order": 1
+		},
+		"comment": {
+			"name": "comment",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "comment",
+			"order": 2
+		},
+		"lessonId": {
+			"name": "lessonId",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "lessonId",
+			"order": 3
+		}
+	}
+}
