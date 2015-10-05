@@ -36,26 +36,18 @@
                 .loadAll()
                 .then(function(courses) {
                     
-                        courses.data.forEach(function(course) {
+                        courses.data.data.forEach(function(course) {
                             course.lessons = [];
-                            courseDetailDataService
-                                    .loadAllLessons(course.resource)
-                                    .then(function(lessons) {
-                                        
+                            coursesService
+                                .loadLessonsFor(course.id)
+                                .then(function(lessons){    
                                         if (_.isArray(lessons.data)){
                                             course.lessons = lessons.data;
-                                            _.forEach(course.lessons, function(lesson) {
-                                               lesson.isAccessible = isAccessible(lesson.id);
-                                               if (lesson.isAccessible){
-                                                   course.isAccessible = true;
-                                               }
-                                            });
                                         }
-                                        
                                     });
                         });
                     
-                    self.courses = [].concat(courses.data);
+                    self.courses = [].concat(courses.data.data);
                     self.loaded = true;
 
                 });
@@ -99,12 +91,12 @@
         }
 
         function isAvailable(course) {
-            return course.resource.length > 0;
+            return true; //course.resource.length > 0;
         }
         
-        function selectLesson(resource, lessonId){
+        function selectLesson(lessonId){
             //#/courseDetail/lessons-welpenkurs/fcd3acb9fea358c7
-            $location.path('/courseDetail/' + resource + '/' + lessonId);
+            $location.path('/courseDetail/' + lessonId);
         }
         
         function isCourseAccessible(course){

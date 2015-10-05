@@ -16,30 +16,9 @@
                     <input ng-model="cd.selected.headerTitle">
                 </md-input-container>
             </div>
-            <div ng-repeat="section in cd.selected.content track by $index">
-                <div layout="row" flex ng-if="cd.editMode" layout-margin>
-                    <span flex></span>
-                    <md-button class="md-raised">+ Text</md-button>
-                    <md-button class="md-raised">+ Video</md-button>
-                    </center>8
-                </div>
-                <p ng-if="section.type ==='text' && !cd.editMode">{{ :: section.content}}</p>
-                <md-input-container ng-if="cd.editMode && section.type ==='text'">
-                    <label>Text</label>
-                    <textarea rows="10" ng-model="section.content"></textarea>
-                </md-input-container>
-                <div ng-if="section.type ==='video'">
-                    <center>
-                        <!--<youtube-video video-id="cd.selected.videoId"></youtube-video>-->
-                        <embed-video ng-if="!cd.editMode" iframe-id="vimeo1" api="1" player_id="vimeo1" width="740" height="420" ng-href="{{section.content}}"></embed-video>
-                    </center>
-                    <md-input-container ng-if="cd.editMode">
-                        <label>VideoLink</label>
-                        <input ng-model="section.content">
-                    </md-input-container>
-                </div>
-            </div>
-            <md-tabs md-selected="selectedIndex" md-dynamic-height md-border-bottom>
+            <div ng-if="cd.editMode" text-angular ng-model="cd.selected.content"></div>
+            <div ng-if="!cd.editMode" ta-bind ng-model="cd.selected.content"></div>
+            <md-tabs ng-hide="cd.editMode" md-selected="selectedIndex" md-dynamic-height md-border-bottom>
                 <md-tab>
                     <!-- ___________ COMMENTS section ___________ -->
                     <md-tab-label>

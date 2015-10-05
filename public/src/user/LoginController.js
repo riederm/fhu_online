@@ -3,7 +3,7 @@
     angular
             .module('fhu')
             .controller('LoginController', ['userService', '$routeParams', '$location', '$scope', '$rootScope', '$mdToast',
-                LoginController
+                '$cookies','Backand', LoginController
             ]);
 
 
@@ -11,7 +11,7 @@
      * the user controller
      * @returns {undefined}
      */
-    function LoginController(userService, $routeParams, $location, $scope, $rootScope, $mdToast) {
+    function LoginController(userService, $routeParams, $location, $scope, $rootScope, $mdToast, $cookies, Backand) {
         var self = this;
 
         self.login = doLogin;
@@ -38,19 +38,16 @@
         }
 
         function fetchCurrentUser(){
-            userService.fetchCurrentUser().success(
-                function(data) {
+            var currentName = Backand.getUsername();
+                if (currentName) {
                     
-                       if (data && data.displayName) {
-                           
-                                self.isLoggedIn = true;
-                                self.message = data.displayName;
-                                userService.me = data;
-                                userService.displayName = data.displayName;
-                           
-                        }    
-                    	$rootScope.$broadcast('userChangedEvent');
-                });
+                        self.isLoggedIn = true;
+                        self.message = currentName;
+                        //userService.me = data;
+                        userService.displayName = currentName;
+                    
+                }    
+                $rootScope.$broadcast('userChangedEvent');
         }
         $scope.$on('userChangedEvent', function(){
             self.message = userService.displayName; 
@@ -61,11 +58,14 @@
         
 
         function doLogin() {
-            userService.login(self.user.name, self.user.password).success(function(data) {
-                
+            userService.login(self.user.name, self.user.password).then(function(data) {
+                     //save the token in the cookie
+                    var tokenName = Backand.getTokenName();
+                    $cookies.putObject(tokenName, data);
                     self.message = userService.displayName;
                     userService.me = self.user;
                     userService.displayName = self.user.name;
+                    
                     self.isLoggedIn = true;
                     fetchCurrentUser();
 
@@ -74,10 +74,10 @@
                     $location.path("#/" + $routeParams.returnTo);
                 }
                 $rootScope.$broadcast('userChangedEvent');
-            }).error(function(){
+            }, function(data){
                 $mdToast.show(
                   $mdToast.simple()
-                    .content('Login fehlgeschlagen')
+                    .content(data.error_description )
                     .position('top right')
                     .hideDelay(3000)
                 );

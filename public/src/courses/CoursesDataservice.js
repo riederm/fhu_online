@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('fhu')
-            .service('coursesService', ['$q', '$http', CoursesDataservice]);
+            .service('coursesService', ['$q', '$http', 'Backand', CoursesDataservice]);
 
     /**
      * Courses DataService
@@ -12,13 +12,28 @@
      * @returns {{loadAll: Function}}
      * @constructor
      */
-    function CoursesDataservice($q, $http) {
+    function CoursesDataservice($q, $http, Backand) {
         // Promise-based API
         return {
             loadAll: function() {
-                // Simulate async nature of real remote calls
-                return $http.get('/courses');
-                //return $q.when(courses);
+                return $http({
+                    method: 'GET',
+                    url: Backand.getApiUrl() + '/1/objects/course',
+                    params: {
+                    }
+                });
+            },
+            
+            loadLessonsFor: function(courseId){
+                  return $http ({
+                    method: 'GET',
+                    url: Backand.getApiUrl() + '/1/query/data/allLessonsFromCourse',
+                    params: {
+                        parameters: {
+                        courseId: courseId
+                        }
+                    }
+                    });
             }
         };
     }

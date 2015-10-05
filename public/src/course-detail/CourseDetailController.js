@@ -16,15 +16,15 @@
      */
     function CourseDetailController(courseDetailDataservice, $mdSidenav, $mdBottomSheet, userService, $routeParams, $mdToast) {
         var self = this;
-        var courseId = $routeParams.courseId;
+        //var courseId = $routeParams.courseId;
         var lessonId = $routeParams.lessonId;
        
         self.courseName         = "lade Kurs...";
         self.selected           = null;
-        self.lessons            = [];
+        //self.lessons            = [];
         self.selectLesson       = selectLesson;
         self.loaded             = false;
-        self.user               = userService.me;
+        //self.user               = userService.me;
         self.isAccessible       = isAccessible;
         self.isAdmin            = isAdmin;
         self.editMode           = false;
@@ -42,9 +42,9 @@
 //                });
                 
         courseDetailDataservice
-                .loadLesson(courseId, lessonId)
+                .loadLesson(lessonId)
                 .then(function(lesson){
-                    self.selected = lesson.data;
+                    self.selected = lesson.data[0];
                     self.loaded = true;
                         });
         
@@ -64,14 +64,14 @@
         }
         
         function isAdmin(){
-            return userService.me.isAdmin;
+            return true; //userService.me.isAdmin;
         }
         
         function editModeChanged(){
             if (!self.editMode){
                 //save changes to server
                 courseDetailDataservice
-                    .saveLesson(courseId, self.selected)
+                    .saveLesson(self.selected)
                     .then(function(savedLesson){
                         $mdToast.show($mdToast.simple()
                             .content('erfolgreich gespeichert')
