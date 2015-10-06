@@ -3,7 +3,7 @@
     angular
             .module('fhu')
             .controller('LoginController', ['userService', '$routeParams', '$location', '$scope', '$rootScope', '$mdToast',
-                '$cookies','Backand', LoginController
+                '$cookies','Backand', '$http', LoginController
             ]);
 
 
@@ -11,7 +11,7 @@
      * the user controller
      * @returns {undefined}
      */
-    function LoginController(userService, $routeParams, $location, $scope, $rootScope, $mdToast, $cookies, Backand) {
+    function LoginController(userService, $routeParams, $location, $scope, $rootScope, $mdToast, $cookies, Backand, $http) {
         var self = this;
 
         self.login = doLogin;
@@ -40,14 +40,22 @@
         function fetchCurrentUser(){
             var currentName = Backand.getUsername();
                 if (currentName) {
-                    
+                    $http ({
+                      method: 'GET',
+                      url: Backand.getApiUrl() + '/1/query/data/userDetails',
+                      params: {
+                        parameters: {}
+                      }
+                    }).then(function(result){
                         self.isLoggedIn = true;
-                        self.message = currentName;
-                        //userService.me = data;
-                        userService.displayName = currentName;
-                    
-                }    
-                $rootScope.$broadcast('userChangedEvent');
+                        var fullName = result.data[0].firstName + ' ' + result.data[0].lastName;
+                        userService.isAdmin = result.data[0].isAdmin
+                        self.message = fullName;
+                        userService.displayName = fullName;
+                        userService.me = result.data[0];
+                        $rootScope.$broadcast('userChangedEvent');       
+                    });
+                }           
         }
         $scope.$on('userChangedEvent', function(){
             self.message = userService.displayName; 
@@ -60,8 +68,8 @@
         function doLogin() {
             userService.login(self.user.name, self.user.password).then(function(data) {
                      //save the token in the cookie
-                    var tokenName = Backand.getTokenName();
-                    $cookies.putObject(tokenName, data);
+                    //var tokenName = Backand.getTokenName();
+                    //$cookies[tokenName] = data;
                     self.message = userService.displayName;
                     userService.me = self.user;
                     userService.displayName = self.user.name;
@@ -86,7 +94,8 @@
 
         function doLogout() {
             userService.logout().success(function(data) {
-                
+                    
+                    userService.isAdmin = false;
                     self.message = "Anmelden";
                     self.isLoggedIn = false;  
                     userService.me = null;

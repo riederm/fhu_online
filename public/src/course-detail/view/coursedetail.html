@@ -18,6 +18,7 @@
             </div>
             <div ng-if="cd.editMode" text-angular ng-model="cd.selected.content"></div>
             <div ng-if="!cd.editMode" ta-bind ng-model="cd.selected.content"></div>
+            
             <md-tabs ng-hide="cd.editMode" md-selected="selectedIndex" md-dynamic-height md-border-bottom>
                 <md-tab>
                     <!-- ___________ COMMENTS section ___________ -->
@@ -31,8 +32,8 @@
                                 <md-list-item class="md-2-line" ng-repeat="c in commentsCtl.comments track by $index">
                                     <md-icon md-svg-icon="username"></md-icon>
                                     <div class="md-list-item-text">
-                                        <h3>{{ :: c.userName }}</h3> <span am-time-ago="c.creationDate"></span>
-                                        <p>{{ :: c.comment }}</p>
+                                        <span>{{ :: c.firstName }} {{ :: c.lastName }}<span/> <i><span am-time-ago="c.creation_date"></span></i>
+                                        <p>{{ :: c.content }}</p>
                                     </div>
                                 </md-list-item>
                             </md-list>
@@ -108,6 +109,7 @@
                     </md-tab-body>
                 </md-tab>
             </md-tabs>
+            
         </md-card-content>
     </md-card>
 </div>

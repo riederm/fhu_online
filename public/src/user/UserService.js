@@ -50,10 +50,6 @@
 
         function doLogin(username, password) {
             return Backand.signin(username, password, 'fhu');
-            /*return $http.post('/users/login', {
-                username: username,
-                password: password
-            });*/
         }
 
         function updateMyLessons(user) {
