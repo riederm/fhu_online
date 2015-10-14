@@ -34,7 +34,7 @@
             if (userService.displayName && userService.displayName.length > 0){
                 return userService.displayName;    
             }
-            return "Anmelden";
+            return Backand.getUsername();;
         }
 
         function fetchCurrentUser(){
@@ -47,13 +47,16 @@
                         parameters: {}
                       }
                     }).then(function(result){
-                        self.isLoggedIn = true;
-                        var fullName = result.data[0].firstName + ' ' + result.data[0].lastName;
-                        userService.isAdmin = result.data[0].isAdmin
-                        self.message = fullName;
-                        userService.displayName = fullName;
-                        userService.me = result.data[0];
-                        $rootScope.$broadcast('userChangedEvent');       
+                        if (result.data.length == 1){
+                            self.isLoggedIn = true;
+                            var fullName = result.data[0].firstName + ' ' + result.data[0].lastName;
+                            userService.isAdmin = result.data[0].isAdmin
+                            self.message = fullName;
+                            userService.displayName = fullName;
+                            userService.me = result.data[0];
+                            userService.isLoggedIn = true;
+                            $rootScope.$broadcast('userChangedEvent');
+                        }       
                     });
                 }           
         }
@@ -74,7 +77,7 @@
                     userService.me = self.user;
                     userService.displayName = self.user.name;
                     
-                    self.isLoggedIn = true;
+                    userService.isLoggedIn = true;
                     fetchCurrentUser();
 
                 
@@ -96,6 +99,7 @@
             userService.logout().success(function(data) {
                     
                     userService.isAdmin = false;
+                    userService.isLoggedIn = false;
                     self.message = "Anmelden";
                     self.isLoggedIn = false;  
                     userService.me = null;

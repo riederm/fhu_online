@@ -20,33 +20,6 @@
         self.isAccessible = isAccessible;
         self.isCourseAccessible = isCourseAccessible;
         self.updateMyLessons = updateMyLessons;
-        
-/*
-// SignInCtrl.js
-      function SignInCtrl(Backand, $cookieStore) {
-        $scope.signIn = function() {
-          Backand.signin($scope.username, $scope.password, $scope.appName)
-          .then(
-            function (token) {
-              //save the token in the cookie
-              $cookieStore.put(Backand.configuration.tokenName, token);
-            },
-            function (data, status, headers, config) {
-              //handle error
-            }
-          );
-        }
-      }
-      // Use an Angular HTTP Interceptor to add the authentication token to each HTTP request
-      function httpInterceptor($q, $log, $cookieStore) {
-        return {
-          request: function(config) {
-            config.headers['Authorization'] = $cookieStore.get('backand_token');
-            return config;
-          }
-        };
-      }        */
-
 
         function doLogin(username, password) {
             return Backand.signin(username, password, 'fhu');
